@@ -16,7 +16,7 @@ Route::get('/', function () {
 });
 
 Auth::routes();
-Route::middleware(['auth','checkAdmin'])->group(function() {
+Route::middleware(['auth','guest'])->group(function() {
   Route::get('home',['as'=>'home', 'uses'=>'HomeController@index']);
   Route::get('web-admin',['as'=>'web-admin', 'uses'=>'Admin\Start@index']);
 });

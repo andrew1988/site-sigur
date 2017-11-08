@@ -15,8 +15,13 @@ class AlterTableUsersAddColumnStatus extends Migration
     {
       if (!Schema::hasColumn('users', 'status')) {
         Schema::table('users', function (Blueprint $table) {
-          $table->integer('status')->default(0)->comment("0 - user normal,1 - moderator, 3 - admin");
+          $table->integer('status')->default(0)->comment("0 - inactiv | 1 inactiv");
         });
+      }
+      if (!Schema::hasColumn('users','checkAdmin', 'type')) {
+            Schema::table('users', function (Blueprint $table) {
+              $table->integer('type')->default(0)->comment("user type: 0 - user normal,1 - moderator, 2 - admin");
+            });
       }
     }
 
@@ -27,10 +32,17 @@ class AlterTableUsersAddColumnStatus extends Migration
      */
     public function down()
     {
+
       if (Schema::hasColumn('users', 'status')) {
-        Schema::table('users', function (Blueprint $table) {
-          $table->dropColumn('status');
-        });
+          Schema::table('users', function (Blueprint $table) {
+            $table->dropColumn('status');
+          });
       }
+      if (Schema::hasColumn('users', 'type')) {
+            Schema::table('users', function (Blueprint $table) {
+              $table->dropColumn('type');
+            });
+      }
+
     }
 }

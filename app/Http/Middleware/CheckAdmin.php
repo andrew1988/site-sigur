@@ -16,13 +16,15 @@ class CheckAdmin
      */
     public function handle($request, Closure $next,$guard = null)
     {
-          dump(Auth::user()->status);
-          $a = 0;
-          if($a == 1){
+          /*dd(Auth::guard($guard)->check());
             if (Auth::guard($guard)->check()) {
+              if(Auth::user()->type == 2){//if user type is 1 then it's an admin.
                 return redirect()->route('web-admin');
-            }
-          }
+              }else{
+                return redirect()->route('home');
+              }
+
+            }*/
 
         return $next($request);
     }
